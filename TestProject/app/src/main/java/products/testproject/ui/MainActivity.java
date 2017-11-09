@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private TextView mErrorText;
     private static Bundle mBundleRecyclerViewState;
 
+
     @Override
     public void showProgress() {
       mProgressBar.setVisibility(View.VISIBLE);
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mMainPresenter.setListInterface(mRecycleAdapter);
         mProgressBar=(ProgressBar) findViewById(R.id.progress_indicator);
         mErrorText=(TextView) findViewById(R.id.error_message);
+
         mScrollListener =new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page) {
@@ -182,4 +184,5 @@ public class MainActivity extends AppCompatActivity implements MainView{
         super.onDestroy();
         mMainPresenter.unsubsribe();//for orientation changes
     }
+
 }

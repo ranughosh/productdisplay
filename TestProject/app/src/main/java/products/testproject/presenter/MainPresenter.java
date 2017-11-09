@@ -85,10 +85,11 @@ public class MainPresenter {
                 } else {
                     if(productResponse.getProductList()!=null && productResponse.getProductList().size()>0) {
                         Log.d(TAG, "Response Array:" + productResponse.getProductList().size());
+                        setTotalItemCount(productResponse.getTotalProducts());
                         setProductList(productResponse.getProductList());
 
                     }
-                     setTotalItemCount(productResponse.getTotalProducts());
+
                 }
             }
         }
@@ -114,16 +115,16 @@ public class MainPresenter {
     }
 
     public void loadProduct(int pageNumber) {
-           if(moreRecordExists(pageNumber)) {
+           //if(moreRecordExists(pageNumber)) {
                Log.d(TAG,"more record exists ");
                mMainView.showProgress();
                mObservable = mProductService.getProduct(getUrl(pageNumber));
                mObservable.subscribeOn(Schedulers.io())
                        .observeOn(AndroidSchedulers.mainThread()).subscribe(mObserver);
-           }
+           /*}
            else{
                Log.d(TAG,"more record does not exist");
-           }
+           }*/
 
     }
 
@@ -155,7 +156,8 @@ public class MainPresenter {
     }
 
     public boolean moreRecordExists(int pageNumber){
-        if((pageNumber-1)*AppConstants.pageSize<=totalItemCount)//index downgraded for the last page
+
+        if(pageNumber==1 || pageNumber*AppConstants.pageSize<=totalItemCount)//index downgraded for the last page
             return true;
         else
             return false;
@@ -169,6 +171,7 @@ public class MainPresenter {
     public void showRecycler(List<Product> data){
         mMainView.showList();
         mRecyclerInterface.setData(data);
+        //Log.d(TAG,"total Item Count:"+totalItemCount);
     }
 
     public void updateScrollPosition(){

@@ -11,5 +11,4 @@ import products.testproject.model.Product;
 
 public interface RecyclerListInterface {
     public void setData(List<Product> productArray);
-
 }
