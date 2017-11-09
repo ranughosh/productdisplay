@@ -12,4 +12,5 @@ public class AppConstants {
     public static String productDetailArray="PRD_DETAIL";
     public static final String KEY_RECYCLER_STATE = "RECYCLER_SATE";
     public static final String DATA = "PRODUCT_DATA";
+    public static final String KEY_TOTAL_COUNT = "TOTAL_COUNT";
 }

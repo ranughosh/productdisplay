@@ -18,7 +18,7 @@ public class ResponseObj {
     private Integer mTotalProducts;
     @SerializedName("pageNumber")
     @Expose
-    private Integer mPageName;
+    private Integer mPageNumber;
     @SerializedName("pageSize")
     @Expose
     private Integer mPageSize;
@@ -60,11 +60,11 @@ public class ResponseObj {
     }
 
     public Integer getPageName() {
-        return mPageName;
+        return mPageNumber;
     }
 
     public void setPageName(Integer mPageName) {
-        this.mPageName = mPageName;
+        this.mPageNumber = mPageName;
     }
 
     public Integer getPageSize() {

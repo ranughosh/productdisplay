@@ -35,7 +35,7 @@ public abstract  class EndlessScrollListener extends RecyclerView.OnScrollListen
 
     public void onScroll(int firstVisibleItem, int visibleItemCount, int totalItemCount)
     {
-        Log.d(TAG,"first visible:"+firstVisibleItem+",visibleItemCount:"+visibleItemCount+",totalItemCount:"+totalItemCount+","+previousTotalItemCount);
+        //Log.d(TAG,"first visible:"+firstVisibleItem+",visibleItemCount:"+visibleItemCount+",totalItemCount:"+totalItemCount+","+previousTotalItemCount);
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
         if (totalItemCount < previousTotalItemCount)
@@ -55,17 +55,19 @@ public abstract  class EndlessScrollListener extends RecyclerView.OnScrollListen
         {
             loading = false;
             previousTotalItemCount = totalItemCount;
-            AppConstants.pageNumber++;
+            //AppConstants.pageNumber++;
         }
 
-        Log.d(TAG,"loading:"+loading);
+        //Log.d(TAG,"loading:"+loading);
         // If it isn’t currently loading, we check to see if we have breached
         // the visibleThreshold and need to reload more data.
         // If we do need to reload some more data, we execute onLoadMore to fetch the data.
         if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem +
                 visibleThreshold))
         {
-            onLoadMore(AppConstants.pageNumber+1);
+            AppConstants.pageNumber++;
+            Log.d(TAG,"pageNumber:"+AppConstants.pageNumber);
+            onLoadMore(AppConstants.pageNumber);
             loading = true;
         }
     }

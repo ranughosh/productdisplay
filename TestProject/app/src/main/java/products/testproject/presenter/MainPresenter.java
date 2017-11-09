@@ -84,7 +84,8 @@ public class MainPresenter {
 
                 } else {
                     if(productResponse.getProductList()!=null && productResponse.getProductList().size()>0) {
-                        Log.d(TAG, "Response Array:" + productResponse.getProductList().size());
+                        Log.d(TAG, "Response Array:" + productResponse.getProductList().size()+","+productResponse.getTotalProducts());
+                        setPageNumber(productResponse.getPageName());
                         setTotalItemCount(productResponse.getTotalProducts());
                         setProductList(productResponse.getProductList());
 
@@ -115,16 +116,16 @@ public class MainPresenter {
     }
 
     public void loadProduct(int pageNumber) {
-           //if(moreRecordExists(pageNumber)) {
-               Log.d(TAG,"more record exists ");
+           if(moreRecordExists(pageNumber)) {
+               //Log.d(TAG,"more record exists ");
                mMainView.showProgress();
                mObservable = mProductService.getProduct(getUrl(pageNumber));
                mObservable.subscribeOn(Schedulers.io())
                        .observeOn(AndroidSchedulers.mainThread()).subscribe(mObserver);
-           /*}
+           }
            else{
                Log.d(TAG,"more record does not exist");
-           }*/
+           }
 
     }
 
@@ -139,7 +140,7 @@ public class MainPresenter {
     }
 
     public void bindViewHolder(RecyclerAdapter.ProductViewHolder viewHolder, int position) {
-        Log.d(TAG, "bind viewholder:" + mProductList.size());
+        //Log.d(TAG, "bind viewholder:" + mProductList.size());
         Product mProductObject = mProductList.get(position);
         viewHolder.setImage(mProductObject.getProductImage());
         viewHolder.setProductName(mProductObject.getProductName());
@@ -156,15 +157,15 @@ public class MainPresenter {
     }
 
     public boolean moreRecordExists(int pageNumber){
-
-        if(pageNumber==1 || pageNumber*AppConstants.pageSize<=totalItemCount)//index downgraded for the last page
+        Log.d(TAG,"pageNumber:"+pageNumber+","+totalItemCount+","+AppConstants.pageNumber);
+        if((pageNumber-1)*AppConstants.pageSize<=totalItemCount)//index downgraded for the last page
             return true;
         else
             return false;
     }
 
     public void delegateOnClick(int aposition,int lposition){
-        Log.d(TAG,"adapter position:"+aposition+","+lposition);
+        //Log.d(TAG,"adapter position:"+aposition+","+lposition);
         mMainView.startDetailActivity(aposition,mProductList);
     }
 
@@ -176,5 +177,9 @@ public class MainPresenter {
 
     public void updateScrollPosition(){
         mMainView.updateScrollPosition();
+    }
+
+    public void setPageNumber(int pageNumber){
+       AppConstants.pageNumber=pageNumber;
     }
 }

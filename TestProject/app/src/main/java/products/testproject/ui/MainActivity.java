@@ -25,6 +25,7 @@ import products.testproject.view.MainView;
 
 import static products.testproject.constants.AppConstants.DATA;
 import static products.testproject.constants.AppConstants.KEY_RECYCLER_STATE;
+import static products.testproject.constants.AppConstants.KEY_TOTAL_COUNT;
 
 public class MainActivity extends AppCompatActivity implements MainView{
 
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
             int scrolledPosition = mBundleRecyclerViewState.getInt(KEY_RECYCLER_STATE);
             Log.d(TAG,"scrolled position recovered:"+scrolledPosition);
             ((LinearLayoutManager) mRecyclerView.getLayoutManager()).scrollToPositionWithOffset(scrolledPosition,0);
+             mMainPresenter.setTotalItemCount(mBundleRecyclerViewState.getInt(KEY_TOTAL_COUNT,0));
             if(mBundleRecyclerViewState.getParcelableArrayList(DATA)!=null){
 
                 ArrayList<Product> prdList=mBundleRecyclerViewState.getParcelableArrayList(DATA);
@@ -163,12 +165,16 @@ public class MainActivity extends AppCompatActivity implements MainView{
         // save RecyclerView state
         mBundleRecyclerViewState = new Bundle();
         int lastFirstVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-        Log.d(TAG,"scrolledPosition stored:"+lastFirstVisiblePosition);
+        //Log.d(TAG,"scrolledPosition stored:"+lastFirstVisiblePosition);
         mBundleRecyclerViewState.putInt(KEY_RECYCLER_STATE,lastFirstVisiblePosition);
         if(mMainPresenter!=null && mMainPresenter.getProductList()!=null) {
             ArrayList<Product> storedProduct = new ArrayList(mMainPresenter.getProductList());
             mBundleRecyclerViewState.putParcelableArrayList(DATA, storedProduct);
+            if(mMainPresenter.getTotalItemCount()>0){
+                mBundleRecyclerViewState.putInt(KEY_TOTAL_COUNT,mMainPresenter.getTotalItemCount());
+            }
         }
+
     }
 
     @Override
