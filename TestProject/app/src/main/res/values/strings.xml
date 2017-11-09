@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestProject</string>
+    <string name="instock">In Stock </string>
+    <string name="error">Ooops ! something went wrong , please check back later</string>
+    <string name="productmaxline">2</string>
+    <string name="ratiingstr">(%1$s)</string>
+</resources>

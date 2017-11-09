@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/horz_padding">
+
+    <ImageView android:id="@+id/product_image"
+        android:layout_width="@dimen/image_dimension"
+        android:layout_height="@dimen/image_dimension"
+        android:scaleType="fitCenter"
+        android:src="@drawable/no_images"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp" />
+
+    <RelativeLayout android:id="@+id/product_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/product_image"
+        android:paddingLeft="@dimen/horz_padding"
+        android:paddingBottom="@dimen/horz_padding">
+    <TextView android:id="@+id/product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="@string/productmaxline"
+        android:minLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textSize="@dimen/product_name_size"
+        tools:text="New Product"/>
+        <TextView android:id="@+id/product_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="@string/productmaxline"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:lines="@string/productmaxline"
+            tools:text="New Product"
+            android:layout_below="@+id/product_name"/>
+        <TextView android:id="@+id/price"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            tools:text="$ 480.00"
+            android:textStyle="bold"
+            android:layout_below="@+id/product_desc"/>
+        <RelativeLayout android:id="@+id/rating_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/price">
+        <RatingBar android:id="@+id/product_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize=".5"
+            android:rating="4.5"
+            style="?android:attr/ratingBarStyleSmall"
+            android:progressTint="@color/colorYellow"
+            android:secondaryProgressTint="@android:color/transparent"
+           />
+            <TextView android:id="@+id/num_of_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/border_padding"
+                tools:text="(5)"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/product_rating"/>
+        </RelativeLayout>
+        <TextView android:id="@+id/instock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rating_wrapper"
+            android:text="@string/instock"
+            android:textStyle="bold"
+            android:textColor="@color/colorAvailable"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+
+        android:layout_below="@+id/product_wrapper"/>
+</RelativeLayout>

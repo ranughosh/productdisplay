@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="border_padding">3dp</dimen>
+    <dimen name="horz_padding">10dp</dimen>
+    <dimen name="image_dimension">50dp</dimen>
+    <dimen name="product_name_size">25sp</dimen>
+</resources>
